@@ -20,6 +20,6 @@ class AbandonTerritory: ExileAbstractAction
 
 Add the abandon.sqf into your mission root or custom content folder, if you have it in a custom location don't forget to edit the above
 
-Battlye
+Battleye
 
 Append your Battleye filters with the whitelistings in the Battleye folder
