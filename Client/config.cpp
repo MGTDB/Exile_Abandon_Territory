@@ -7,7 +7,7 @@ class Flag
 			class AbandonTerritory: ExileAbstractAction
 			{
 			  title = "Abandon Territory";
-			  condition = "((typeOf ExileClientInteractionObject) isEqualTo 'Exile_Construction_Flag_Static' && (call ExileClient_util_world_isInOwnTerritory) && ((ExileClientInteractionObject getvariable ['ExileFlagStolen',1]) isEqualTo 0))";
+			  condition = "((typeOf ExileClientInteractionObject) isEqualTo 'Exile_Construction_Flag_Static' && (call ExileClient_util_world_isInOwnTerritory))";
 			  action = "execVM 'abandon.sqf';";
 			};
 		};

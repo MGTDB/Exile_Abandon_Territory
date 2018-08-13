@@ -12,7 +12,12 @@ if (_result) then
 	};
 	_pos = getPosATL _tFlag;
 	_territoryName = _tFlag getVariable ["ExileTerritoryName", 0];
-	abandon = [_tFlag,_pos,player,getPlayerUID player,_territoryName];
+	_stolen = false;
+	if !((_tFlag getvariable ['ExileFlagStolen',1]) isEqualTo 0) then
+	{
+		_stolen = true;
+	};
+	abandon = [_tFlag,_pos,player,getPlayerUID player,_territoryName,_stolen];
 	uiSleep 0.2;
 	publicVariableServer "abandon";
 	uiSleep 0.2;
