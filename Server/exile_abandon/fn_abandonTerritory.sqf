@@ -14,10 +14,10 @@ if(isServer) then
 		if!(_objectID isEqualTo -1)then
 		{
 			format['deleteTerritory:%1', _objectID] call ExileServer_system_database_query_fireAndForget;
-		};
-		_territoryLog = format ["%1 (%2) ABANDONED THEIR TERRITORY %3 AT %4 %5",_player,_playerUID,_territoryName,mapGridPosition _tFlag,_location];
-		["TERRITORYLOG",_territoryLog] call FNC_A3_CUSTOMLOG;		
-
+		};				
+		// Uncomment below for infiSTAR logging
+		//_territoryLog = format ["%1 (%2) ABANDONED THEIR TERRITORY %3 AT %4 %5",_player,_playerUID,_territoryName,mapGridPosition _tFlag,_location];
+		//["TERRITORYLOG",_territoryLog] call FNC_A3_CUSTOMLOG;
 		if!(_stolen)then
 		{
 			_add = 0.1;
