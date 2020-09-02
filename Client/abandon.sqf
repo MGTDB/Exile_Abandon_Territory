@@ -1,14 +1,16 @@
-private["_result"];
+private["_result","_result1","_result2","_tFlag","_moderators","_pos","_territoryName","_stolen"];
 disableSerialization;
-_result = ["Do you really want to abandon your territory?", "Confirm", "Yes", "Nah"] call BIS_fnc_guiMessage;
-waitUntil { !isNil "_result" };
-if (_result) then
+_result = ["Do you really want to abandon your territory?                     Read the information carefully", "Abandon Territory Info", "continue"] call BIS_fnc_guiMessage;
+_result1 = ["Have you removed any constructions you want to keep?    All constructions will be deleted after the next server restart", "Abandon Territory Info", "continue"] call BIS_fnc_guiMessage;
+_result2 = ["Abandon territory", "Abandon Territory confirmation", "Yes", "No"] call BIS_fnc_guiMessage;
+waitUntil { !isNil "_result2"};
+if (_result2) then
 {
 	_tFlag = nearestObject [player, "Exile_Construction_Flag_Static"];
-	_owner = _tFlag getVariable ["ExileOwnerUID", ""];
-	if !(_owner isEqualTo getPlayerUID player) exitWith 
+	_moderators = _tFlag getVariable ["ExileTerritoryModerators", []];
+	if !(getPlayerUID player in _moderators) exitWith 
 	{
-		["ErrorTitleOnly", ["Only the territory owner can do this"]] call ExileClient_gui_toaster_addTemplateToast;
+	  	["ErrorTitleOnly", ["Only the territory owner or moderators can do this"]] call ExileClient_gui_toaster_addTemplateToast;
 	};
 	_pos = getPosATL _tFlag;
 	_territoryName = _tFlag getVariable ["ExileTerritoryName", 0];
