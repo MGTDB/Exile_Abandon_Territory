@@ -25,22 +25,28 @@ if(isServer) then
 		clearMagazineCargoGlobal _crate;
 		clearBackpackCargoGlobal _crate;
 		clearItemCargoGlobal _crate;
-
+		
 		{
-	    	_type = typeOf _x;
-	    	_filter = ('getText(_x >> "staticObject") == _type' configClasses(configfile >> "CfgConstruction")) select 0;
+	    		_type = typeOf _x;
+			_objectID = _x getVariable ['ExileDatabaseID',-1];
+	    		_filter = ('getText(_x >> "staticObject") == _type' configClasses(configfile >> "CfgConstruction")) select 0;
+			_kitMagazines = getArray(_filter >> "refundObjects");
+			if !((_x getVariable ["ExileAccessCode", -1]) isEqualTo -1) then { _cargoToAdd pushBack "Exile_Item_Codelock"};
+			_cargoToAdd append _kitMagazines;
+			_x call ExileServer_object_construction_database_delete;
+			deleteVehicle _x;
+			
+		} forEach (_tFlag nearObjects["Exile_Construction_Abstract_Static",_size]);
+		
+		{
+	    		_type = typeOf _x;
+	    		_filter = ('getText(_x >> "staticObject") == _type' configClasses(configfile >> "CfgConstruction")) select 0;
 			_kitMagazine = getText(_filter >> "kitMagazine");
 			_cargoToAdd pushBack _kitMagazine;
+			_x call ExileServer_object_construction_database_delete;
 			deleteVehicle _x;
 		} forEach (_tFlag nearObjects["AbstractConstruction",_size]);
-		{
-	    	_type = typeOf _x;
-	    	_filter = ('getText(_x >> "staticObject") == _type' configClasses(configfile >> "CfgConstruction")) select 0;
-			_kitMagazine = getText(_filter >> "kitMagazine");
-			_cargoToAdd pushBack _kitMagazine;
-			deleteVehicle _x;
-		} forEach (_tFlag nearObjects["Exile_Construction_Abstract_Static",_size]);
-
+		
 		if(_cargoToAdd isEqualTo [])then
 		{
 			deleteVehicle _crate;
