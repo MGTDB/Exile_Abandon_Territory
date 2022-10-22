@@ -23,3 +23,5 @@ Add the abandon.sqf into your mission root or custom content folder, if you have
 Battleye
 
 Append your Battleye filters with the whitelistings in the Battleye folder
+
+Add the contents of exile.ini to your ini file, note, this is for 64bit only
