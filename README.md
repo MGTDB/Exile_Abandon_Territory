@@ -25,3 +25,4 @@ Battleye
 Append your Battleye filters with the whitelistings in the Battleye folder
 
 Add the contents of exile.ini to your ini file, note, this is for 64bit only
+Say thanks, buy me a beer or a pizza https://bit.ly/3gtPTkT
